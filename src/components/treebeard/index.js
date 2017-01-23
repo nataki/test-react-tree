@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import {findNode} from './filter';
-import {Treebeard} from 'react-treebeard';
+import {Treebeard, decorators} from 'react-treebeard';
+/**
+ * TODO: investigate:
+ * lazy-loading,
+ * updates(by pushes) and reflecting changes in ui: expand-collapse, new items, removed items
+ * collapse/expand with methods not only user interactions
+ * display custom labels as process names
+ *
+ * Q: do we need to distinguish select and expand events?
+ */
 
 const data_ = {
     name: 'root',
@@ -33,60 +42,16 @@ const data_ = {
     ]
 };
 
-const data_source = {
-    name: 'root',
-    id: 'id_parent0',
-    toggled: true,
-    children: [
-        {
-            name: 'parent',
-            id: 'id_parent1',
-            children: [
-                {
-                    name: 'child1',
-                    id: 'id_child1'
-                },
-                {
-                    name: 'child2',
-                    id: 'id_child2'
-                }
-            ]
-        },
-        {
-            name: 'loading parent',
-            id: 'id_parent2',
-            loading: true,
-            children: []
-        },
-        {
-            name: 'parent',
-            id: 'id_parent3',
-            children: [
-                {
-                    name: 'nested parent',
-                    id: 'id_parent31',
-                    children: [
-                        {
-                            name: 'nested child 1',
-                            id: 'id_child311'
-                        },
-                        {
-                            name: 'nested child 2',
-                            id: 'id_child312'
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-};
-
-let data = {
+const data_source = require('../../data/data.json');
+const data = {
     name: 'root',
     id: 'id_parent1',
     toggled: false,
     loading: true,
     hasChildren: true,
+    data: {
+
+    },
     children: []
 };
 
@@ -108,6 +73,18 @@ const loadChildren = () => {
     );
 };
 
+decorators.Header = (props) => {
+        let nodeData = props.node.data,
+            nodeIcon = nodeData && nodeData.status ?
+            `lifecycle-${nodeData.status}` : 'no-lifecycle',
+            nodeProgress = nodeData && nodeData.progress ? nodeData.progress : 0;
+        return (
+            <div style={props.style}>
+                {nodeIcon} {props.node.name} ({nodeProgress}%)
+            </div>
+        );
+    };
+
 export default class TreeExample extends Component {
     constructor(props){
         super(props);
@@ -123,6 +100,7 @@ export default class TreeExample extends Component {
     loadChildrenTree(node){
         loadChildren().then((data) => {
             node.children = data;
+            this.setState({data: data_source});
             //update data in state -> find node by id and set its children and loading state
         });
     }
@@ -141,6 +119,7 @@ export default class TreeExample extends Component {
 
         this.setState({ cursor: node });
     }
+
     render(){
         return (
             <div>
@@ -148,11 +127,13 @@ export default class TreeExample extends Component {
                 <Treebeard
                     data={this.state.data}
                     onToggle={this.onToggle}
+                    decorators={decorators}
                 />
             </div>
         );
     }
 }
+
 /*class TreeExample extends Component {
     constructor(props){
         super(props);

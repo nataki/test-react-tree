@@ -1,9 +1,15 @@
+//TODO: use Immutable.js to correctly clone tree  structure
+
 export const defaultMatcher = (filterText, node) => {
     return node.id === filterText;
 };
 
-export const nameMatcher = (filterText, node) => {
+const nameMatcher = (filterText, node) => {
     return node.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1;
+};
+
+export const defaultUpdater = (node, data) => {
+    return Object.assign({}, node, {children: data || []})
 };
 
 export const findNode = (node, filter, matcher = defaultMatcher) => {
@@ -12,22 +18,24 @@ export const findNode = (node, filter, matcher = defaultMatcher) => {
         result = node;
     } else if (node.children && // or i have decendents and one of them match
         node.children.length) {
-        result = node.children.find(child => findNode(child, filter, matcher));
+        for (let i=0; i<node.children.length; i++) {
+            let child = node.children[i];
+            result = findNode(child, filter, matcher);
+            if (result) break;
+        }
     }
     return result ?  Object.assign({}, result) : false;
 };
-
-export const checkNode = (node, filter, matcher = defaultMatcher) => {
+const checkNode = (node, filter, matcher = defaultMatcher) => {
     return matcher(filter, node) || // i match
         (node.children && // or i have decendents and one of them match
         node.children.length &&
         !!node.children.find(child => findNode(child, filter, matcher)));
 };
 
-
-export const updateFilteredNodes = (node, filter, matcher = defaultMatcher, updater) => {
+export const updateFilteredNodes = (node, filter, data, matcher = defaultMatcher, updater = defaultUpdater) => {
     let children = node.children;
-    if(!children || children.length === 0){
+    if (!children || children.length === 0){
         return Object.assign({}, node, { toggled: false });
     }
     const childrenWithMatches = node.children.filter(child => findNode(child, filter, matcher));
