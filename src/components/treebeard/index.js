@@ -99,7 +99,7 @@ export default class TreeExample extends Component {
 
     loadChildrenTree(node){
         loadChildren().then((data) => {
-            node.children = data;
+            // node.children = data;
             this.setState({data: data_source});
             //update data in state -> find node by id and set its children and loading state
         });
@@ -123,7 +123,7 @@ export default class TreeExample extends Component {
     render(){
         return (
             <div>
-                <button onClick={this.onUpdateBtnClick}>Update tree</button>
+                <h2>react-treebeard</h2>
                 <Treebeard
                     data={this.state.data}
                     onToggle={this.onToggle}

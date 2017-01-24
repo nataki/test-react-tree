@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import TreeExample from './components/treebeard/';
+import TreeExample2 from './components/rc-tree/';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
           <h2>React tree tests</h2>
         </div>
         <TreeExample/>
+        <TreeExample2/>
       </div>
     );
   }

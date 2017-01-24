@@ -34,6 +34,7 @@ const checkNode = (node, filter, matcher = defaultMatcher) => {
 };
 
 export const updateFilteredNodes = (node, filter, data, matcher = defaultMatcher, updater = defaultUpdater) => {
+    //TODO:
     let children = node.children;
     if (!children || children.length === 0){
         return Object.assign({}, node, { toggled: false });
