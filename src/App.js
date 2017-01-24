@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import TreeExample from './components/treebeard/';
 import TreeExample2 from './components/rc-tree/';
+import TreeExample3 from './components/tree/';
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
         </div>
         <TreeExample/>
         <TreeExample2/>
+        <TreeExample3/>
       </div>
     );
   }

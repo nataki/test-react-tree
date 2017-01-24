@@ -187,7 +187,8 @@ const TreeExample2 = React.createClass({
         });
     },*/
     onLoadData(treeNode) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
+            // reject();
             setTimeout(() => {
                 const treeData = [...this.state.treeData];
                 getNewTreeData(treeData, treeNode.props.eventKey, generateTreeNodes(treeNode), 2);
@@ -222,6 +223,7 @@ const TreeExample2 = React.createClass({
                     onExpand={this.onExpand}
                     loadData={this.onLoadData}
                     showLine={false}
+                    showIcon={true}
                 >
                     {treeNodes}
                 </Tree>

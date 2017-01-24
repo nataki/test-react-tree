@@ -1,0 +1,62 @@
+[{
+  "name": "root",
+  "id": "id_parent0",
+  "isExpanded": true,
+  "data": {
+    "status": "pending",
+    "progress": 10,
+    "hasChildren": true
+  },
+  "children": [
+    {
+      "name": "parent",
+      "id": "id_parent1",
+      "isExpanded": true,
+      "data": {
+        "status": "pending",
+        "progress": 20,
+        "hasChildren": true
+      },
+      "children": [
+        {
+          "name": "parent11",
+          "id": "id_parent11",
+          "isLoading": true
+        },
+        {
+          "name": "child11",
+          "id": "id_child11",
+          "isLeaf": true
+        },
+        {
+          "name": "child12",
+          "id": "id_child12",
+          "isLeaf": true
+        },
+        {
+          "name": "child12",
+          "id": "id_child12",
+          "isLeaf": true,
+          "isActive": true
+        },
+        {
+          "name": "child12",
+          "id": "id_child12",
+          "isLeaf": true,
+          "isSelected": true
+        }
+      ]
+    },
+    {
+      "name": "parent2",
+      "id": "id_parent2",
+      "loading": true,
+      "data": {
+        "status": "pending",
+        "progress": 30,
+        "hasChildren": true
+      },
+      "children": []
+    }
+  ]
+}]
