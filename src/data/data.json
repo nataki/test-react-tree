@@ -1,0 +1,63 @@
+{
+  "name": "root",
+  "id": "id_parent0",
+  "toggled": true,
+  "data": {
+    "status": "pending",
+    "progress": 10
+  },
+  "children": [
+    {
+      "name": "parent",
+      "id": "id_parent1",
+      "data": {
+        "status": "pending",
+        "progress": 20
+      },
+      "children": [
+        {
+          "name": "child1",
+          "id": "id_child1"
+        },
+        {
+          "name": "child2",
+          "id": "id_child2"
+        }
+      ]
+    },
+    {
+      "name": "loading parent",
+      "id": "id_parent2",
+      "loading": true,
+      "data": {
+        "status": "pending",
+        "progress": 30
+      },
+      "children": []
+    },
+    {
+      "name": "parent3",
+      "id": "id_parent3",
+      "data": {
+        "status": "error",
+        "progress": 40
+      },
+      "children": [
+        {
+          "name": "parent31",
+          "id": "id_parent31",
+          "children": [
+            {
+              "name": "child311",
+              "id": "id_child311"
+            },
+            {
+              "name": "child312",
+              "id": "id_child312"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
