@@ -1,0 +1,60 @@
+{
+  "id_parent0": {
+    "name": "root",
+    "id": "id_parent0",
+    "isExpanded": true,
+    "data": {
+      "status": "pending",
+      "progress": 10,
+      "hasChildren": true
+    },
+    "children": {
+      "id_parent1": {
+        "name": "parent",
+        "id": "id_parent1",
+        "isExpanded": true,
+        "data": {
+          "status": "pending",
+          "progress": 20,
+          "hasChildren": true
+        },
+        "children": {
+          "id_parent11": {
+            "name": "parent11",
+            "id": "id_parent11",
+            "isLoading": true
+          },
+          "id_child12": {
+            "name": "child12",
+            "id": "id_child12",
+            "isLeaf": true
+          },
+          "id_child13": {
+            "name": "child13",
+            "id": "id_child13",
+            "isLeaf": true,
+            "isActive": true
+          },
+          "id_child14": {
+            "name": "child14",
+            "id": "id_child14",
+            "isLeaf": true,
+            "isSelected": true
+          }
+          }
+        }
+      ,
+      "id_parent2": {
+        "name": "parent2",
+        "id": "id_parent2",
+        "loading": true,
+        "data": {
+          "status": "pending",
+          "progress": 30,
+          "hasChildren": true
+        },
+        "children": []
+      }
+    ]
+  }
+}

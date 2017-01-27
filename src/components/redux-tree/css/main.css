@@ -1,0 +1,23 @@
+.av-rtree-root {
+
+}
+.av-rtree-subtree {
+
+}
+.av-rtree-node {
+    cursor: pointer;
+}
+
+.av-rtree-node .av-rtree-node-header{
+    display: inline-block;
+}
+.av-rtree-node.selected>.av-rtree-node-header{
+    border: 1px solid green;
+}
+
+.av-rtree-node>.av-rtree-node-children{
+    display: none;
+}
+.av-rtree-node.expanded>.av-rtree-node-children{
+    display: block;
+}
