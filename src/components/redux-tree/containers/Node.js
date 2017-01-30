@@ -4,6 +4,20 @@ import { connect } from 'react-redux'
 import * as actions from '../actions'
 
 var classNames = require('classnames');
+const NodeHeader = (props) => {
+  let nodeData = props.node.data || {},
+      /*nodeIcon = nodeData.status ?
+          `lifecycle-${nodeData.status}` : 'no-lifecycle',*/
+      nodeIconCls = 'av-process-dashboard-lifecycle-icon ' +
+          (nodeData.status ? `${nodeData.status}-icon`: ''),
+      nodeProgress = nodeData.progress ? nodeData.progress : 0;
+
+  return (
+      <div className="av-rtree-node-header" onClick={props.onClick}>
+        <div className={nodeIconCls}></div> {props.node.name} ({nodeProgress}%)
+      </div>
+  );
+};
 
 export class Node extends Component {
 
@@ -21,12 +35,8 @@ export class Node extends Component {
     requestToggle(id, isExpanded);
   };
 
-  handleIncrementClick = () => {
-    const { increment, id } = this.props;
-    increment(id)
-  };
 
-  handleAddChildClick = e => {
+ /* handleAddChildClick = e => {
     e.preventDefault();
 
     const { addChild, createNode, id } = this.props;
@@ -40,7 +50,7 @@ export class Node extends Component {
     const { removeChild, deleteNode, parentId, id } = this.props;
     removeChild(parentId, id);
     deleteNode(id)
-  };
+  };*/
 
   renderChild = childId => {
     const { id } = this.props;
@@ -60,23 +70,27 @@ export class Node extends Component {
     let className = classNames(
         "av-rtree-node",{
           'selected': isSelected,
-          'expanded': isExpanded
+          'expanded': isExpanded,
+          'loading': isLoading
         }
     );
     return (
       <div className={className}>
 
         {!isLeaf &&
-        <span className="av-rtree-node-switcher"
+          <span className="av-rtree-node-switcher"
               onClick={this.handleToggleClick}>
           </span>
         }
 
-         {isLoading && '~'}
+        <span className={(isLoading ? 'av-spinner-black-small ' : '') + "av-rtree-node-icon"}></span>
+        {/*isLoading && <span className="av-spinner-black-small">~</span>*/}
 
-        <div className="av-rtree-node-header"  onClick={this.handleSelectClick}>
+        {/*<div className="av-rtree-node-header"  onClick={this.handleSelectClick}>
           {name}
-        </div>
+        </div>*/}
+
+        <NodeHeader node={this.props} onClick={this.handleSelectClick}/>
 
         <ul className="av-rtree-node-children">
           {childIds.map(this.renderChild)}

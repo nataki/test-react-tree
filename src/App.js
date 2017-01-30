@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-// import TreeExample from './components/treebeard/';
+import TreeExample from './components/treebeard/';
 import TreeExample2 from './components/rc-tree/';
 // import TreeExample3 from './components/tree/';
 import TreeExample4 from './components/redux-tree/';
@@ -14,7 +14,7 @@ class App extends Component {
           {/*<img src={logo} className="App-logo" alt="logo" />*/}
           <h2>React tree tests</h2>
         </div>
-        {/*<TreeExample/>*/}
+        <TreeExample/>
         <TreeExample2/>
         {/*<TreeExample3/>*/}
         <TreeExample4/>

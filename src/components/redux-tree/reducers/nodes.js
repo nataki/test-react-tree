@@ -3,7 +3,10 @@ import {
     SET_DESELECTED,
     TOGGLE,
     SET_LOADING,
-    ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE
+    ADD_CHILD,
+    REMOVE_CHILD,
+    REMOVE_CHILDREN,
+    CREATE_NODE, DELETE_NODE, UPDATE_NODE
 } from '../actions'
 
 const childIds = (state, action) => {
@@ -12,6 +15,8 @@ const childIds = (state, action) => {
             return [ ...state, action.childId ];
         case REMOVE_CHILD:
             return state.filter(id => id !== action.childId);
+        case REMOVE_CHILDREN:
+            return [];
         default:
             return state
     }
@@ -22,40 +27,48 @@ const node = (state, action) => {
         case CREATE_NODE:
             return {
                 id: action.nodeId,
-                    // counter: 0,
-                    childIds: [],
-                    ...action.nodeData
-        };
-    case SET_SELECTED:
-        return {
-            ...state,
-            //isSelected: !state.isSelected
-            isSelected: true
-        };
-    case SET_DESELECTED:
-        return {
-            ...state,
-            isSelected: false
-        };
-    case TOGGLE:
-        return {
-            ...state,
-            isExpanded: !state.isExpanded
-        };
-    case SET_LOADING:
-        return {
-            ...state,
-            isLoading: action.isLoading
-        };
-    case ADD_CHILD:
+                // counter: 0,
+                childIds: [],
+                ...action.nodeData
+            };
+        case UPDATE_NODE:
+            let data =  Object.assign({},state.data,action.nodeData);
+            return {
+                ...state,
+                data
+            };
+        case SET_SELECTED:
+            return {
+                ...state,
+                //isSelected: !state.isSelected
+                isSelected: true
+            };
+        case SET_DESELECTED:
+            return {
+                ...state,
+                isSelected: false
+            };
+        case TOGGLE:
+            return {
+                ...state,
+                isExpanded: !state.isExpanded
+            };
+        case SET_LOADING:
+            return {
+                ...state,
+                isLoading: action.isLoading
+            };
+
+        case ADD_CHILD:
         case REMOVE_CHILD:
-        return {
-            ...state,
-            childIds: childIds(state.childIds, action)
-        };
-    default:
-    return state
-}
+        case REMOVE_CHILDREN:
+            return {
+                ...state,
+                childIds: childIds(state.childIds, action)
+            };
+        default:
+            return state
+    }
 };
 
 const getAllDescendantIds = (state, nodeId) => (

@@ -40,7 +40,6 @@
     display: block;
 }
 
-
 .av-rtree-node>.av-rtree-node-switcher{
     line-height: 16px;
     margin-right: 2px;
@@ -59,4 +58,41 @@
 }
 .av-rtree-node.expanded>.av-rtree-node-switcher{
     background-image: url('../images/triangle_maximized.svg');
+}
+
+.av-rtree-node-icon{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.av-spinner-black-small{
+    width: 16px;
+    height: 16px;
+    background-size: 80% auto;
+    background-repeat: no-repeat;
+    background-image: url('../images/spinner-black.svg');
+    animation: av-360deg-rotate 1.1s infinite linear;
+}
+/* lifecycle icons*/
+.av-process-dashboard-lifecycle-icon {
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: 11px;
+    height: 11px;
+    display: inline-block;
+    margin-right: 2px;
+}
+.av-process-dashboard-lifecycle-icon.error-icon {
+    background-image:url("../images/lifecycle_error.png")
+}
+.av-process-dashboard-lifecycle-icon.finished-icon {
+    background-image:url("../images/lifecycle_finished.png")
+}
+.av-process-dashboard-lifecycle-icon.pending-icon {
+    background-image:url("../images/lifecycle_pending.png")
+}
+.av-process-dashboard-lifecycle-icon.running-icon {
+    background-image:url("../images/lifecycle_running.png")
 }

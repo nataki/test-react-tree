@@ -4,8 +4,10 @@ export const SET_LOADING = 'SET_LOADING';
 export const TOGGLE = 'TOGGLE';
 export const CREATE_NODE = 'CREATE_NODE';
 export const DELETE_NODE = 'DELETE_NODE';
+export const UPDATE_NODE = 'UPDATE_NODE';
 export const ADD_CHILD = 'ADD_CHILD';
 export const REMOVE_CHILD = 'REMOVE_CHILD';
+export const REMOVE_CHILDREN = 'REMOVE_CHILDREN';
 
 export const set_selected = (nodeId) => ({
   type: SET_SELECTED,
@@ -38,6 +40,12 @@ export const deleteNode = (nodeId) => ({
   nodeId
 });
 
+export const updateNode = (nodeId, nodeData) => ({
+  type: UPDATE_NODE,
+  nodeId,
+  nodeData
+});
+
 export const addChild = (nodeId, childId) => ({
   type: ADD_CHILD,
   nodeId,
@@ -48,6 +56,11 @@ export const removeChild = (nodeId, childId) => ({
   type: REMOVE_CHILD,
   nodeId,
   childId
+});
+
+export const removeChildren = (nodeId) => ({
+  type: REMOVE_CHILDREN,
+  nodeId
 });
 
 export const select = (nodeId, isSelected) => (dispatch, getState) => {
@@ -65,6 +78,7 @@ export const select = (nodeId, isSelected) => (dispatch, getState) => {
 
 export const requestToggle = (nodeId, isExpanded) => (dispatch, getState, api) => {
     if (isExpanded) {
+        dispatch(removeChildren(nodeId));
         return dispatch(toggle(nodeId));
     } else {
         dispatch(toggle(nodeId));
@@ -79,7 +93,6 @@ export const requestToggle = (nodeId, isExpanded) => (dispatch, getState, api) =
                 dispatch(setLoading(nodeId, false));
             },
             () => {
-
             });
     }
 };
