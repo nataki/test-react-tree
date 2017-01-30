@@ -1,3 +1,19 @@
+.av-rtree {
+    margin: 0;
+    padding: 5px;
+}
+.av-rtree li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    white-space: nowrap;
+    outline: 0;
+}
+.av-rtree ul {
+    margin: 0;
+    padding: 0 0 0 18px;
+}
+
 .av-rtree-root {
 
 }
@@ -12,7 +28,9 @@
     display: inline-block;
 }
 .av-rtree-node.selected>.av-rtree-node-header{
-    border: 1px solid green;
+    background-color: #ffe6b0;
+    border: 1px #ffb951 solid;
+    opacity: 0.8;
 }
 
 .av-rtree-node>.av-rtree-node-children{
@@ -20,4 +38,25 @@
 }
 .av-rtree-node.expanded>.av-rtree-node-children{
     display: block;
+}
+
+
+.av-rtree-node>.av-rtree-node-switcher{
+    line-height: 16px;
+    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    border: 0 none;
+    cursor: pointer;
+    outline: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+
+    background-image: url('../images/triangle_collapsed.svg');
+}
+.av-rtree-node.expanded>.av-rtree-node-switcher{
+    background-image: url('../images/triangle_maximized.svg');
 }

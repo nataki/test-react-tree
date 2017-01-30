@@ -67,7 +67,7 @@
     "name": "child14",
     "id": "id_child14",
     "isLeaf": true,
-    "isSelected": true,
+    "isSelected": false,
     "childIds": [
     ]
   }

@@ -2,7 +2,7 @@
  * Created by nataliia.akimova on 1/24/2017.
  */
 import React, {Component} from 'react';
-const data_source = require('../../data/data.json');
+/*const data_source = require('../../data/data.json');
 const data = {
     name: 'root',
     id: 'id_parent1',
@@ -10,10 +10,9 @@ const data = {
     loading: true,
     hasChildren: true,
     data: {
-
-    },
-    children: []
-};
+},
+children: []
+};*/
 
 // import 'rc-tree/assets/index.css';
 import './main.css';

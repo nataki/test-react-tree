@@ -10,8 +10,8 @@ export class Node extends Component {
   handleSelectClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const { select, id } = this.props;
-    select(id);
+    const { select, id, isSelected } = this.props;
+    select(id, !isSelected);
   };
 
   handleToggleClick = (e) => {
@@ -67,11 +67,12 @@ export class Node extends Component {
       <div className={className}>
 
         {!isLeaf &&
-          <button onClick={this.handleToggleClick}>
-            {isExpanded ? '-' : '+'}
-          </button>
+        <span className="av-rtree-node-switcher"
+              onClick={this.handleToggleClick}>
+          </span>
         }
-        {isLoading && '~'}
+
+         {isLoading && '~'}
 
         <div className="av-rtree-node-header"  onClick={this.handleSelectClick}>
           {name}
@@ -113,7 +114,7 @@ export class Node extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return state[ownProps.id]
+  return state['nodes'][ownProps.id]
 }
 
 const ConnectedNode = connect(mapStateToProps, actions)(Node);
