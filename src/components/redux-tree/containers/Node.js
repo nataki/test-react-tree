@@ -6,13 +6,11 @@ import * as actions from '../actions'
 var classNames = require('classnames');
 const NodeHeader = (props) => {
   let nodeData = props.node.data || {},
-      nodeIconCls = 'av-process-dashboard-lifecycle-icon ' +
-          (nodeData.status ? `${nodeData.status}-icon`: ''),
       nodeProgress = nodeData.progress ? nodeData.progress : 0;
 
   return (
       <div className="av-rtree-node-header" onClick={props.onClick}>
-        <div className={nodeIconCls}></div> {props.node.name} ({nodeProgress}%)
+        {props.node.name} ({nodeProgress}%)
       </div>
   );
 };
@@ -62,22 +60,29 @@ export class Node extends Component {
 
   render() {
     const {
-        /*name, parentId, */
         id, childIds,
-        /*isSelected, */isLoading, isExpanded, isLeaf
+        isLoading, isExpanded, isLeaf
     } = this.props.node;
 
+    const nodeData = this.props.node.data || {};
     const isSelected = this.props.selection.indexOf(id) > -1;
 
-    let className = classNames(
+    let nodeCls = classNames(
         "av-rtree-node",{
           'selected': isSelected,
           'expanded': isExpanded,
           'loading': isLoading
         }
     );
+    let nodeIconCls = classNames(
+        "av-rtree-node-icon", {
+          'av-process-dashboard-lifecycle-icon': !isLoading,
+          [`${nodeData.status}-icon`]: !isLoading,
+          'av-spinner-black-small': isLoading
+        }
+    );
     return (
-      <div className={className}>
+      <div className={nodeCls}>
 
         {!isLeaf &&
           <span className="av-rtree-node-switcher"
@@ -85,14 +90,8 @@ export class Node extends Component {
           </span>
         }
 
-        <span className={(isLoading ? 'av-spinner-black-small ' : '') + "av-rtree-node-icon"}></span>
-        {/*isLoading && <span className="av-spinner-black-small">~</span>*/}
-
-        {/*<div className="av-rtree-node-header"  onClick={this.handleSelectClick}>
-          {name}
-        </div>*/}
-
-        <NodeHeader node={this.props.node} onClick={this.handleSelectClick}/>
+        <div className={nodeIconCls}></div>
+        <NodeHeader node={this.props.node} onClick={this.handleSelectClick} />
 
         <ul className="av-rtree-node-children">
           {childIds.map(this.renderChild)}
@@ -100,33 +99,6 @@ export class Node extends Component {
       </div>
     )
   }
-  /*render() {
-    const { name, parentId, childIds } = this.props;
-    return (
-      <div>
-        {name}
-        {' '}
-        <button onClick={this.handleIncrementClick}>
-          +
-        </button>
-        {' '}
-        {typeof parentId !== 'undefined' &&
-          <a href="#" onClick={this.handleRemoveClick}
-             style={{ color: 'lightgray', textDecoration: 'none' }}>
-            ×
-          </a>
-        }
-        <ul>
-          {childIds.map(this.renderChild)}
-          <li key="add">
-            <a href="#" onClick={this.handleAddChildClick}>
-              Add child
-            </a>
-          </li>
-        </ul>
-      </div>
-    )
-  }*/
 }
 
 function mapStateToProps(state, ownProps) {
