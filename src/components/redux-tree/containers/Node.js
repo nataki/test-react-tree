@@ -6,8 +6,6 @@ import * as actions from '../actions'
 var classNames = require('classnames');
 const NodeHeader = (props) => {
   let nodeData = props.node.data || {},
-      /*nodeIcon = nodeData.status ?
-          `lifecycle-${nodeData.status}` : 'no-lifecycle',*/
       nodeIconCls = 'av-process-dashboard-lifecycle-icon ' +
           (nodeData.status ? `${nodeData.status}-icon`: ''),
       nodeProgress = nodeData.progress ? nodeData.progress : 0;
@@ -24,15 +22,16 @@ export class Node extends Component {
   handleSelectClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const { select, id, isSelected } = this.props;
-    select(id, !isSelected);
+    const { select, node } = this.props;
+
+    select(node.id/*, !node.isSelected*/);
   };
 
   handleToggleClick = (e) => {
     e.preventDefault();
     console.log('toggle');
-    const { requestToggle, id, isExpanded } = this.props;
-    requestToggle(id, isExpanded);
+    const { requestToggle, node } = this.props;
+    requestToggle(node.id, node.isExpanded);
   };
 
 
@@ -53,19 +52,22 @@ export class Node extends Component {
   };*/
 
   renderChild = childId => {
-    const { id } = this.props;
+    const { node } = this.props;
     return (
       <li key={childId}>
-        <ConnectedNode id={childId} parentId={id} />
+        <ConnectedNode id={childId} parentId={node.id} />
       </li>
     )
   };
 
   render() {
     const {
-        name, parentId, childIds,
-        isSelected, isLoading, isExpanded, isLeaf
-    } = this.props;
+        /*name, parentId, */
+        id, childIds,
+        /*isSelected, */isLoading, isExpanded, isLeaf
+    } = this.props.node;
+
+    const isSelected = this.props.selection.indexOf(id) > -1;
 
     let className = classNames(
         "av-rtree-node",{
@@ -90,7 +92,7 @@ export class Node extends Component {
           {name}
         </div>*/}
 
-        <NodeHeader node={this.props} onClick={this.handleSelectClick}/>
+        <NodeHeader node={this.props.node} onClick={this.handleSelectClick}/>
 
         <ul className="av-rtree-node-children">
           {childIds.map(this.renderChild)}
@@ -128,7 +130,10 @@ export class Node extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return state['nodes'][ownProps.id]
+  return {
+    node: state['nodes'][ownProps.id],
+    selection: state.selection
+  }
 }
 
 const ConnectedNode = connect(mapStateToProps, actions)(Node);

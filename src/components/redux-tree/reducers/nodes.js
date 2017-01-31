@@ -37,7 +37,7 @@ const node = (state, action) => {
                 ...state,
                 data
             };
-        case SET_SELECTED:
+        /*case SET_SELECTED:
             return {
                 ...state,
                 //isSelected: !state.isSelected
@@ -47,7 +47,7 @@ const node = (state, action) => {
             return {
                 ...state,
                 isSelected: false
-            };
+            };*/
         case TOGGLE:
             return {
                 ...state,

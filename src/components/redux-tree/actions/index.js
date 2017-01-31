@@ -63,17 +63,13 @@ export const removeChildren = (nodeId) => ({
   nodeId
 });
 
-export const select = (nodeId, isSelected) => (dispatch, getState) => {
+export const select = (nodeId) => (dispatch, getState) => {
     //single-selection mode
     let state = getState();
-    if (state.selection.length) {
-        console.log('deselect', state.selection[0]);
-        dispatch(set_deselected(state.selection[0]));
-    }//deselect
-    if (isSelected) {
-        console.log('select', nodeId);
-        dispatch(set_selected(nodeId)); //don't dispatch deselect twice
+    if (state.selection.length && (nodeId !== state.selection[0])) {
+        dispatch(set_deselected(state.selection[0]));//deselect
     }
+    dispatch(set_selected(nodeId)); //don't dispatch deselect twice
 };
 
 export const requestToggle = (nodeId, isExpanded) => (dispatch, getState, api) => {
