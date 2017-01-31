@@ -23,7 +23,9 @@
 .av-rtree-node {
     cursor: pointer;
 }
-
+.av-rtree-node.leaf{
+    margin-left: 18px;
+}
 .av-rtree-node .av-rtree-node-header{
     display: inline-block;
 }
@@ -36,10 +38,6 @@
 .av-rtree-node>.av-rtree-node-children{
     display: none;
 }
-.av-rtree-node.expanded>.av-rtree-node-children{
-    display: block;
-}
-
 .av-rtree-node>.av-rtree-node-switcher{
     line-height: 16px;
     margin-right: 2px;
@@ -55,6 +53,9 @@
     background-attachment: scroll;
 
     background-image: url('../images/triangle_collapsed.svg');
+}
+.av-rtree-node.expanded>.av-rtree-node-children{
+    display: block;
 }
 .av-rtree-node.expanded>.av-rtree-node-switcher{
     background-image: url('../images/triangle_maximized.svg');

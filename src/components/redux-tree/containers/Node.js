@@ -71,6 +71,7 @@ export class Node extends Component {
         "av-rtree-node",{
           'selected': isSelected,
           'expanded': isExpanded,
+          'leaf': isLeaf,
           'loading': isLoading
         }
     );
